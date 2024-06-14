@@ -12,6 +12,7 @@ const Playlist = ({ playlistName, playlistTracks, setPlaylistName, onRemove }) =
       <input 
         value={playlistName} 
         onChange={handleNameChange}
+        className={styles.playlistNameInput}
         />
       <Tracklist tracks={playlistTracks} onRemove={onRemove}/>
     </div>

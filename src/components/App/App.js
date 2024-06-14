@@ -5,7 +5,6 @@ import Playlist from '../Playlist/Playlist';
 import styles from './App.module.css';
 
 const App = () => {
-      // Hard-coded array of track objects
   const [searchResults, setSearchResults] = useState([
     { id: 1, name: 'Song 1', artist: 'Artist 1', album: 'Album 1' },
     { id: 2, name: 'Song 2', artist: 'Artist 2', album: 'Album 2' },
@@ -14,37 +13,43 @@ const App = () => {
 
   const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlistTracks, setPlaylistTracks] = useState([
-    // Add some dummy tracks for playlist if needed
     { id: 4, name: 'Song 4', artist: 'Artist 4', album: 'Album 4' }
   ]);
 
   const addTrack = (track) => {
     if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
-        return;
+      return;
     }
     setPlaylistTracks([...playlistTracks, track]);
   }
 
   const removeTrack = (track) => {
-    setPlaylistTracks(playlistTracks.filter(savedTrack => savedTrack.id !== track.id)); 
-  };
+    setPlaylistTracks(playlistTracks.filter(savedTrack => savedTrack.id !== track.id));
+  }
+
+  const handleSearch = (searchTerm) =>{
+    console.log(`Searching for ${searchTerm}`)
+  }
+
+  const handleSavePlaylist = () => {
+    console.log('Saving playlist to Spotify');
+  }
 
   return (
     <div className={styles.App}>
       <h1>Jammming</h1>
-      <SearchBar />
+      <SearchBar onSearch={handleSearch} />
       <div className={styles.resultsAndPlaylist}>
-        {/* Passing addTrack to SearchResults as onAdd */}
         <SearchResults searchResults={searchResults} onAdd={addTrack} />
-      <div className={styles.playlist}>
-        <Playlist 
-        playlistName={playlistName}
-        playlistTracks={playlistTracks} 
-        setPlaylistName={setPlaylistName}
-        onRemove={removeTrack}  // Pass removeTrack to Playlist
-        />
-        <button className={styles.saveButton}>Save To Spotify</button>
-      </div>
+        <div className={styles.playlist}>
+          <Playlist 
+            playlistName={playlistName}
+            setPlaylistName={setPlaylistName}
+            playlistTracks={playlistTracks} 
+            onRemove={removeTrack}
+          />
+          <button className={styles.saveButton} onClick={handleSavePlaylist}>Save To Spotify</button>
+        </div>
       </div>
     </div>
   );
