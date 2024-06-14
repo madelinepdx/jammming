@@ -43,48 +43,42 @@ const Spotify = {
           name: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
-          uri: track.uri
+          uri: track.uri,
+          preview_url: track.preview_url
         }));
       });
   },
 
   savePlaylist(name, trackUris) {
     if (!name || !trackUris.length) {
-    return;
+      return Promise.reject('Invalid playlist name or track URIs');
     }
 
     const accessToken = Spotify.getAccessToken();
-    const headers = { Authorization: `Bearer ${accessToken}`};
+    const headers = {
+      Authorization: `Bearer ${accessToken}`
+    };
     let userId;
 
     return fetch('https://api.spotify.com/v1/me', { headers: headers })
-    .then(response => response.json())
-    .then(jsonResponse => {
-      userId = jsonResponse.id;
-      return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-        headers: headers,
-        method: 'POST',
-        body: JSON.stringify({ name: name })
-      })
-        .then(response => response.json())
-        .then(jsonResponse => {
-          const playlistId = jsonResponse.id;
-          return fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-            headers: headers,
-            method: 'POST',
-            body: JSON.stringify({ uris: trackUris })
+      .then(response => response.json())
+      .then(jsonResponse => {
+        userId = jsonResponse.id;
+        return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+          headers: headers,
+          method: 'POST',
+          body: JSON.stringify({ name: name })
+        }).then(response => response.json())
+          .then(jsonResponse => {
+            const playlistId = jsonResponse.id;
+            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+              headers: headers,
+              method: 'POST',
+              body: JSON.stringify({ uris: trackUris })
+            });
           });
-        });
-    })
-    .then(() => {
-        alert('Playlist saved successfully!');
-    })
-    .catch(error => {
-        console.log('Error saving playlist:', error);
-        alert('Failed to save playlist.');
-    });
-}
+      });
+  }
 };
-    
 
 export default Spotify;

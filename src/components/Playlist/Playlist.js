@@ -7,14 +7,14 @@ const Playlist = ({ playlistName, playlistTracks, setPlaylistName, onRemove }) =
     setPlaylistName(event.target.value);
   };
 
-    return (
+  return (
     <div className={styles.playlist}>
       <input 
         value={playlistName} 
         onChange={handleNameChange}
         className={styles.playlistNameInput}
-        />
-      <Tracklist tracks={playlistTracks} onRemove={onRemove}/>
+      />
+      <Tracklist tracks={playlistTracks} onRemove={onRemove} />
     </div>
   );
 };

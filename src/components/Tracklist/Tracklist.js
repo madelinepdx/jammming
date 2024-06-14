@@ -5,12 +5,12 @@ import Track from '../Track/Track';
 const Tracklist = ({ tracks, onAdd, onRemove }) => {
   return (
     <div className={styles.tracklist}>
-      {tracks.map(track => (
+      {tracks && tracks.map(track => (
         <Track 
-        key={track.id} 
-        track={track} 
-        onAdd={onAdd} 
-        onRemove={onRemove}
+          key={track.id} 
+          track={track} 
+          onAdd={onAdd} 
+          onRemove={onRemove}
         />
       ))}
     </div>

@@ -1,12 +1,18 @@
 import React from 'react';
 import styles from './Track.module.css';
 
-const Track = ({ track, onAdd, onRemove, }) => {
+const Track = ({ track, onAdd, onRemove }) => {
   return (
     <div className={styles.track}>
       <p>{track.name} - {track.artist} - {track.album}</p>
-      <button onClick={() => onAdd(track)}>+</button> {/* Add button */}
-      <button onClick={() => onRemove(track)}>-</button> {/* Remove button */}
+      {track.preview_url && (
+        <audio controls>
+          <source src={track.preview_url} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      )}
+      {onAdd && <button onClick={() => onAdd(track)}>+</button>}
+      {onRemove && <button onClick={() => onRemove(track)}>-</button>}
     </div>
   );
 };

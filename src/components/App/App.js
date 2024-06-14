@@ -19,34 +19,31 @@ const App = () => {
       return;
     }
     setPlaylistTracks([...playlistTracks, track]);
-  }
+  };
 
   const removeTrack = (track) => {
     setPlaylistTracks(playlistTracks.filter(savedTrack => savedTrack.id !== track.id));
-  }
+  };
 
   const handleSearch = (searchTerm) => {
     Spotify.search(searchTerm).then(results => {
       setSearchResults(results);
     });
-  }
+  };
 
   const handleSavePlaylist = () => {
     const trackUris = playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(playlistName, trackUris).then(() => {
-        setPlaylistName('New Playlist');
-        setPlaylistTracks([]);
+      setPlaylistName('New Playlist');
+      setPlaylistTracks([]);
+      alert('Playlist saved to Spotify!');
+    }).catch(error => {
+      console.error('Error saving playlist:', error);
+      alert('Failed to save playlist.');
     });
 
     console.log('Saving playlist to Spotify with URIs:', trackUris);
-
-    // Implement the actual save functionality here
-
-    // Reset the playlist
-    setPlaylistTracks([]);
-    setPlaylistName('New Playlist');
-  }
-
+  };
 
   return (
     <div className={styles.App}>
