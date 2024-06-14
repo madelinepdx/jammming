@@ -1,0 +1,28 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.resultsAndPlaylist {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+.searchResults, .playlist {
+    flex: 1;
+    margin: 40px;
+}
+
+.playlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.saveButton {
+    margin-top: 20px;
+}
