@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Track.module.css';
 
-const Track = ({ track }) => {
+const Track = ({ track, onAdd }) => {
   return (
     <div className={styles.track}>
       <p>{track.name} - {track.artist} - {track.album}</p>
-      <button>+</button> {/* Add button */}
+      <button onClick={() => onAdd(track)}>+</button> {/* Add button */}
       <button>-</button> {/* Remove button */}
     </div>
   );

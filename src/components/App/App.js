@@ -18,12 +18,20 @@ const App = () => {
     { id: 4, name: 'Song 4', artist: 'Artist 4', album: 'Album 4' }
   ]);
 
+  const addTrack = (track) => {
+    if (playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
+        return;
+    }
+    setPlaylistTracks([...playlistTracks, track]);
+  }
+
   return (
     <div className={styles.App}>
       <h1>Jammming</h1>
       <SearchBar />
       <div className={styles.resultsAndPlaylist}>
-        <SearchResults searchResults={searchResults} />
+        {/* Passing addTrack to SearchResults as onAdd */}
+        <SearchResults searchResults={searchResults} onAdd={addTrack} />
       <div className={styles.playlist}>
         <Playlist 
         playlistName={playlistName}
