@@ -5,15 +5,16 @@ import Playlist from '../Playlist/Playlist';
 import styles from './App.module.css';
 
 const App = () => {
+      // Hard-coded array of track objects with URIs
   const [searchResults, setSearchResults] = useState([
-    { id: 1, name: 'Song 1', artist: 'Artist 1', album: 'Album 1' },
-    { id: 2, name: 'Song 2', artist: 'Artist 2', album: 'Album 2' },
-    { id: 3, name: 'Song 3', artist: 'Artist 3', album: 'Album 3' }
+    { id: 1, name: 'Song 1', artist: 'Artist 1', album: 'Album 1', uri: 'spotify:track:1' },
+    { id: 2, name: 'Song 2', artist: 'Artist 2', album: 'Album 2', uri: 'spotify:track:2' },
+    { id: 3, name: 'Song 3', artist: 'Artist 3', album: 'Album 3', uri: 'spotify:track:3' }
   ]);
 
   const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlistTracks, setPlaylistTracks] = useState([
-    { id: 4, name: 'Song 4', artist: 'Artist 4', album: 'Album 4' }
+    { id: 4, name: 'Song 4', artist: 'Artist 4', album: 'Album 4', uri: 'spotify:track:4' }
   ]);
 
   const addTrack = (track) => {
@@ -32,8 +33,16 @@ const App = () => {
   }
 
   const handleSavePlaylist = () => {
-    console.log('Saving playlist to Spotify');
+    const trackURIs = playlistTracks.map(track => track.uri);
+    console.log('Saving playlist to Spotify with URIs:', trackURIs);
+
+     // Reset the playlist
+  setPlaylistTracks([]);
+  setPlaylistName('New Playlist');
+
   }
+
+ 
 
   return (
     <div className={styles.App}>
