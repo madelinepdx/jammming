@@ -12,6 +12,7 @@ const App = () => {
     { id: 3, name: 'Song 3', artist: 'Artist 3', album: 'Album 3' }
   ]);
 
+  const [playlistName, setPlaylistName] = useState('New Playlist');
   const [playlistTracks, setPlaylistTracks] = useState([
     // Add some dummy tracks for playlist if needed
     { id: 4, name: 'Song 4', artist: 'Artist 4', album: 'Album 4' }
@@ -24,7 +25,11 @@ const App = () => {
       <div className={styles.resultsAndPlaylist}>
         <SearchResults searchResults={searchResults} />
       <div className={styles.playlist}>
-        <Playlist playlistTracks={playlistTracks} />
+        <Playlist 
+        playlistName={playlistName}
+        playlistTracks={playlistTracks} 
+        setPlaylistName={setPlaylistName}
+        />
         <button className={styles.saveButton}>Save To Spotify</button>
       </div>
       </div>
