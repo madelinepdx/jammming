@@ -25,6 +25,10 @@ const App = () => {
     setPlaylistTracks([...playlistTracks, track]);
   }
 
+  const removeTrack = (track) => {
+    setPlaylistTracks(playlistTracks.filter(savedTrack => savedTrack.id !== track.id)); 
+  };
+
   return (
     <div className={styles.App}>
       <h1>Jammming</h1>
@@ -37,6 +41,7 @@ const App = () => {
         playlistName={playlistName}
         playlistTracks={playlistTracks} 
         setPlaylistName={setPlaylistName}
+        onRemove={removeTrack}  // Pass removeTrack to Playlist
         />
         <button className={styles.saveButton}>Save To Spotify</button>
       </div>

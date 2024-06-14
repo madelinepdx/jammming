@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Playlist.module.css';
 import Tracklist from '../Tracklist/Tracklist';
 
-const Playlist = ({ playlistName, playlistTracks, setPlaylistName }) => {
+const Playlist = ({ playlistName, playlistTracks, setPlaylistName, onRemove }) => {
   const handleNameChange = (event) => {
     setPlaylistName(event.target.value);
   };
@@ -13,7 +13,7 @@ const Playlist = ({ playlistName, playlistTracks, setPlaylistName }) => {
         value={playlistName} 
         onChange={handleNameChange}
         />
-      <Tracklist tracks={playlistTracks} />
+      <Tracklist tracks={playlistTracks} onRemove={onRemove}/>
     </div>
   );
 };
